@@ -2,7 +2,7 @@
 
 > Use this repo to start a professional Python project.
 
-- Additional information: <https://github.com/denisecase/pro-analytics-02>
+- Additional information: <https://github.com/kaitlin-hodges/smart-store-kaitlinhodges>
 - Project organization: [STRUCTURE](./STRUCTURE.md)
 - Build professional skills:
   - **Environment Management**: Every project in isolation
@@ -153,7 +153,7 @@ Anytime we make working changes to code is a good time to git add-commit-push to
 
 ```shell
 git add .
-git commit -m "describe your change in quotes"
+git commit -m "Update project files"
 git push -u origin main
 ```
 
