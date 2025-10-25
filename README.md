@@ -131,9 +131,6 @@ uv run python -m analytics_project.demo_module_viz
 You should see:
 
 - Log messages in the terminal
-- Greetings in several languages
-- Simple statistics
-- A chart window open (close the chart window to continue).
 
 If this works, your project is ready! If not, check:
 
