@@ -1,6 +1,6 @@
 # Pro Analytics 02 Python Starter Repository
 
-> Use this repo to start a professional Python project.
+> This contaions my start of a professional Python project.
 
 - Additional information: <https://github.com/kaitlin-hodges/smart-store-kaitlinhodges>
 - Project organization: [STRUCTURE](./STRUCTURE.md)
@@ -15,8 +15,8 @@
 
 ## WORKFLOW 1. Set Up Your Machine
 
-Proper setup is critical.
-Complete each step in the following guide and verify carefully.
+Proper setup is critical for success.
+Complete each step in the following guide and verify carefully using PowerShell on Windows.
 
 - [SET UP MACHINE](./SET_UP_MACHINE.md)
 
@@ -29,7 +29,7 @@ Complete each step in the following guide.
 
 - [SET UP PROJECT](./SET_UP_PROJECT.md)
 
-It includes the critical commands to set up your local environment (and activate it):
+Critical commands  that need to be used to set up your local environment (and activate it):
 
 ```shell
 uv venv
