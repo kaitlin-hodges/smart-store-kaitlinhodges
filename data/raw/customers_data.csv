@@ -199,4 +199,4 @@ CustomerID,Name,Region,CustomerSince,LifetimePurchaseAmt,PreferredContactMethod
 1197,William Wilson,West,4/4/2023,124.85,SMS
 1198,Chris Allen,south-west,10/11/2022,15.55,SMS
 1199,James Cooley,West,7/23/2020,164.52,Call
-1005,Jessica Mora,South,8/5/2021,,Email
+1005,Jessica Mora,South,8/5/2021,467.5,Email
