@@ -22,17 +22,18 @@ import pathlib
 import sys
 import pandas as pd
 import logging
+import numpy as np
 
-# Ensure project root is in sys.path for local imports (now 2 parents are needed)
-sys.path.append(str(pathlib.Path(__file__).resolve().parent.parent))
+# Ensure project root is in sys.path for local imports
+sys.path.append(str(pathlib.Path(__file__).resolve().parents[3]))
 
-from analytics_project.utils.data_scrubber import DataScrubber
 from analytics_project.utils.logger import logger
+from analytics_project.utils.data_scrubber import DataScrubber
 
 # Constants
 SCRIPTS_DATA_PREP_DIR: pathlib.Path = pathlib.Path(__file__).resolve().parent
 SCRIPTS_DIR: pathlib.Path = SCRIPTS_DATA_PREP_DIR.parent
-PROJECT_ROOT: pathlib.Path = pathlib.Path(__file__).resolve().parent
+PROJECT_ROOT: pathlib.Path = pathlib.Path(__file__).resolve().parents[3]
 DATA_DIR: pathlib.Path = PROJECT_ROOT / "data"
 RAW_DATA_DIR: pathlib.Path = DATA_DIR / "raw"
 PREPARED_DATA_DIR: pathlib.Path = DATA_DIR / "prepared"
@@ -91,7 +92,7 @@ def remove_duplicates(df: pd.DataFrame) -> pd.DataFrame:
     """
     logger.info(f"FUNCTION START: remove_duplicates with dataframe shape={df.shape}")
 
-    df_deduped = df.drop_duplicates(subset=[CustomerID]).reset_index(drop=True)
+    df_deduped = df.drop_duplicates(subset="CustomerID").reset_index(drop=True)
 
     logger.info(f"Original dataframe shape: {df.shape}")
     logger.info(f"Deduped  dataframe shape: {df_deduped.shape}")
