@@ -1,4 +1,4 @@
-CustomerID,Name,Region,CustomerSince,LifetimePurchaseAmt,PreferredContactMethod
+CustomerID,Name,Region,CustomerSince,LifetimePurchaseAmtUSD,PreferredContactMethod
 1000,Robert Gomez,West,2/25/2024,95.4,Call
 1001,John Silva,East,12/1/2020,161.89,SMS
 1002,Mark Marshall,Central,8/8/2020,205.45,Email
@@ -15,6 +15,7 @@ CustomerID,Name,Region,CustomerSince,LifetimePurchaseAmt,PreferredContactMethod
 1013,Alyssa Morgan,North,7/22/2022,21.35,Email
 1014,Cindy Woods,East,4/2/2024,17.58,Email
 1015,Jennifer Rodgers,North,2/12/2023,450.45,Call
+,,,,,
 1016,Andrea Roberts,EAST,5/16/2021,654.45,SMS
 1017,Brittney Burnett,North,7/3/2020,125.68,SMS
 1018,Edwin Garrison,south-west,8/31/2020,145.87,SMS
@@ -26,11 +27,13 @@ CustomerID,Name,Region,CustomerSince,LifetimePurchaseAmt,PreferredContactMethod
 1024,Andres Avila,Central,9/19/2022,46.47,Email
 1025,Garrett Lewis,South,8/4/2023,85.48,Call
 1026,Gary Walls,North,10/5/2023,128.21,Call
+1052,Brandon Hinton,south-west,11/10/2022,143.52,SMS
 1027,Anthony Schroeder,east,10/4/2020,385.84,Call
 1028,Haley Wagner,West,11/3/2023,67.45,SMS
 1029,Gina Powers,West,10/26/2022,24.58,SMS
 1030,Alice Robinson,EAST,8/6/2021,249.4,Call
 1031,Jessica Frazier,West,10/20/2021,540.59,Email
+1028,Haley Wagner,West,11/3/2023,406,SMS
 1032,Terri Long,east,10/23/2022,164.2,SMS
 1033,Paul Perkins,east,3/16/2022,10.58,Email
 1034,Heather Smith,Central,9/16/2022,64.45,Call
@@ -43,6 +46,7 @@ CustomerID,Name,Region,CustomerSince,LifetimePurchaseAmt,PreferredContactMethod
 1041,David Beltran,east,1/18/2021,153.25,Email
 1042,Christopher Dodson,North,10/30/2023,34.55,SMS
 1043,Eric Pena,West,6/30/2022,16.45,Call
+1033,Paul Perkins,east,3/16/2022,50,Email
 1044,Anita Huerta,East,4/8/2022,19.48,Email
 1045,Dr. Susan Bailey,North,10/2/2020,520.45,SMS
 1046,Tyler Colon,Central,3/3/2021,234.48,SMS
@@ -200,3 +204,17 @@ CustomerID,Name,Region,CustomerSince,LifetimePurchaseAmt,PreferredContactMethod
 1198,Chris Allen,south-west,10/11/2022,15.55,SMS
 1199,James Cooley,West,7/23/2020,164.52,Call
 1005,Jessica Mora,South,8/5/2021,467.5,Email
+1062,Ashley Harmon,South,2/13/2024,46.52,Call
+1071,Christopher Frost,east,8/21/2020,32,SMS
+1077,Amy Espinoza,North,5/29/2021,455.5,Email
+1085,Steven Wright,Central,8/22/2021,23.54,Email
+1092,Timothy Hill,West,9/7/2023,168,Email
+1148,Dean Allison,West,6/23/2021,43.52,SMS
+1154,Edward Castillo,North,10/1/2020,524.5,SMS
+1159,Kelli Smith,North,1/28/2022,75.45,Call
+1164,William Ramsey,North,5/4/2023,12.5,Email
+1169,Michael Edwards,south-west,9/26/2023,130.5,Call
+1172,Eric Barr,EAST,2/1/2023,10.54,SMS
+1181,Tiffany Smith,East,4/7/2024,254.58,SMS
+1186,Timothy Williams,West,9/28/2021,90.54,SMS
+1192,Gregory Medina,EAST,6/6/2020,20.57,Email
