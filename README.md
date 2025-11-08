@@ -176,19 +176,14 @@ Each time forward progress is made, remember to git add-commit-push.
          - Ran these comands
 #### 1. Create an isolated virtual environment
 uv venv
-
 #### 2. Pin a specific Python version (3.12 recommended)
 uv python pin 3.12
-
 #### 3. Install all dependencies, including optional dev/docs tools
 uv sync --extra dev --extra docs --upgrade
-
 #### 4. Enable pre-commit checks so they run automatically on each commit
 uv run pre-commit install
-
 #### 5. Verify the Python version (should show 3.12.x)
 uv run python --version
-
 ### 3. Opened project in VS Code
       - Activate Virtual Environment
         - .\.venv/Scripts\activate
@@ -196,8 +191,6 @@ uv run python --version
 #### git add .
 #### git commit -m "Update project files"
 #### git push -u origin main
-
-
 
 ### P2: BI Python - Reading Raw Data into Pandas DataFrames
 #### 1. Reviewed BI Tools
@@ -212,7 +205,6 @@ uv run python --version
 #### git add .
 #### git commit -m "  "
 #### git push -u origin main
-
 
 ## P3: Prepare Data for ETL
 ### 1. Created a Pyton script located in the src folder and named data_scrubber.py. This script uses a DataScrubber class to clean datasets.
