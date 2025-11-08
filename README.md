@@ -164,7 +164,7 @@ Before starting a new session, remember to do a `git pull` and keep your tools u
 
 Each time forward progress is made, remember to git add-commit-push.
 
-# Set SmartSales Project up
+#### Set SmartSales Project up
   - Created GitHub Account
   - Setup new project from a starter template  in C:/Repos
     - cloned repo to local drive on my machine
@@ -174,53 +174,53 @@ Each time forward progress is made, remember to git add-commit-push.
       - Open VS Code
       - Opened a new terminal
          - Ran these comands
-# 1. Create an isolated virtual environment
+#### 1. Create an isolated virtual environment
 uv venv
 
-# 2. Pin a specific Python version (3.12 recommended)
+#### 2. Pin a specific Python version (3.12 recommended)
 uv python pin 3.12
 
-# 3. Install all dependencies, including optional dev/docs tools
+#### 3. Install all dependencies, including optional dev/docs tools
 uv sync --extra dev --extra docs --upgrade
 
-# 4. Enable pre-commit checks so they run automatically on each commit
+#### 4. Enable pre-commit checks so they run automatically on each commit
 uv run pre-commit install
 
-# 5. Verify the Python version (should show 3.12.x)
+#### 5. Verify the Python version (should show 3.12.x)
 uv run python --version
 
 ### 3. Opened project in VS Code
       - Activate Virtual Environment
         - .\.venv/Scripts\activate
       - Run Git Add, Commit, and Push to GitHub often
-# git add .
-# git commit -m "Update project files"
-# git push -u origin main
+#### git add .
+#### git commit -m "Update project files"
+#### git push -u origin main
 
 
 
-# P2: BI Python - Reading Raw Data into Pandas DataFrames
-### 1. Reviewed BI Tools
-### 2. Installed Power BI Desktop for Windows
-### 3. Open VS code
+### P2: BI Python - Reading Raw Data into Pandas DataFrames
+#### 1. Reviewed BI Tools
+#### 2. Installed Power BI Desktop for Windows
+#### 3. Open VS code
   - verified README.md is in root folder
   - found data/raw folder with files
   - create new source file located in src folder and named data_prep.py in src/analytics_project folder and copied content from [Raw Data Folder](https://github.com/denisecase/smart-sales-starter-files/tree/main/data/raw)
 ### 4. Always open terminal in root project folder
   - uv run python -m analytics_project.data_prep and verify everything runs correctly.
         - Run Git Add, Commit, and Push to GitHub often & Update README.md
-# git add .
-# git commit -m "Update project files"
-# git push -u origin main
+#### git add .
+#### git commit -m "  "
+#### git push -u origin main
 
 
-# P3: Prepare Data for ETL
-## 1. Created a Pyton script located in the src folder and named data_scrubber.py. This script uses a DataScrubber class to clean datasets.
+## P3: Prepare Data for ETL
+### 1. Created a Pyton script located in the src folder and named data_scrubber.py. This script uses a DataScrubber class to clean datasets.
 ##
-# Run Git Add, Commit, and Push to GitHub often & Update README.md
-# git add .
-# git commit -m "Update project files"
-# git push -u origin main
+#### Run Git Add, Commit, and Push to GitHub often & Update README.md
+##### git add .
+##### git commit -m "  "
+##### git push -u origin main
 
 
 
