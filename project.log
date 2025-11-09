@@ -112,3 +112,12 @@ Norwegian: Hei! Velkommen til Python-programmering.
 2025-10-28 19:38:INFO    AT data_prep.py:32: Reading raw data from C:\Repos\smart-store-kaitlinhodges\data\raw\sales_data.csv.
 2025-10-28 19:38:INFO    AT data_prep.py:35: sales_data.csv: loaded DataFrame with shape 2001 rows x 7 cols
 2025-10-28 19:38:INFO    AT data_prep.py:64: Data preparation complete.
+2025-11-07 23:22:INFO    AT utils_logger.py:105: Logging to file: C:\Repos\smart-store-kaitlinhodges\project.log
+2025-11-07 23:22:INFO    AT data_prep.py:52: Starting data preparation...
+2025-11-07 23:22:INFO    AT data_prep.py:32: Reading raw data from C:\Repos\smart-store-kaitlinhodges\data\raw\customers_data.csv.
+2025-11-07 23:22:INFO    AT data_prep.py:35: customers_data.csv: loaded DataFrame with shape 219 rows x 6 cols
+2025-11-07 23:22:INFO    AT data_prep.py:32: Reading raw data from C:\Repos\smart-store-kaitlinhodges\data\raw\products_data.csv.
+2025-11-07 23:22:INFO    AT data_prep.py:35: products_data.csv: loaded DataFrame with shape 126 rows x 6 cols
+2025-11-07 23:22:INFO    AT data_prep.py:32: Reading raw data from C:\Repos\smart-store-kaitlinhodges\data\raw\sales_data.csv.
+2025-11-07 23:22:INFO    AT data_prep.py:35: sales_data.csv: loaded DataFrame with shape 2058 rows x 9 cols
+2025-11-07 23:22:INFO    AT data_prep.py:64: Data preparation complete.

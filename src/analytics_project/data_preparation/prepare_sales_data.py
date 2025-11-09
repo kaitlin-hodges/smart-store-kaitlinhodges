@@ -1,6 +1,5 @@
 # src/analytics_project/data_preparation/prepare_sales_data.py
-"""
-scripts/data_preparation/prepare_sales.py
+"""scripts/data_preparation/prepare_sales.py
 
 This script reads sales data from the data/raw folder, cleans the data, adding columns,
 removing duplicates, handling missing values and writes the cleaned version to the data/prepared folder.
@@ -20,15 +19,14 @@ Tasks:
 # Import from Python Standard Library
 import pathlib
 import sys
-import pandas as pd
-import logging
+
 import numpy as np
+import pandas as pd
 
 # Ensure project root is in sys.path for local imports
 sys.path.append(str(pathlib.Path(__file__).resolve().parents[3]))
 
 from analytics_project.utils.logger import logger
-from analytics_project.utils.data_scrubber import DataScrubber
 
 # Constants
 SCRIPTS_DATA_PREP_DIR: pathlib.Path = pathlib.Path(__file__).resolve().parent
@@ -64,8 +62,7 @@ def read_raw_data(file_name: str) -> pd.DataFrame:
 
 
 def save_prepared_data(df: pd.DataFrame, file_name: str) -> None:
-    """
-    Save cleaned data to CSV.
+    """Save cleaned data to CSV.
 
     Args:
         df (pd.DataFrame): Cleaned DataFrame.
@@ -125,7 +122,7 @@ def add_sales_columns(df: pd.DataFrame) -> pd.DataFrame:
     # Add PaymentType
     if "PaymentType" not in df.columns:
         np.random.seed(42)
-        df["PaymentType"] = np.random.choice(['Cash', 'Debit', 'StoreCredit'], size=len(df))
+        df["PaymentType"] = np.random.choice(["Cash", "Debit", "StoreCredit"], size=len(df))
         added_columns.append("PaymentType")
     elif df["PaymentType"].isna().all():
         logger.warning("Column 'PaymentType' exists but contains only missing values.")
@@ -140,8 +137,7 @@ def add_sales_columns(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def handle_missing_values(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Handle missing values by filling or dropping.
+    """Handle missing values by filling or dropping.
     This logic is specific to the actual data and business rules.
 
     Args:
@@ -169,8 +165,7 @@ def handle_missing_values(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def remove_outliers(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Remove outliers based on thresholds.
+    """Remove outliers based on thresholds.
     This logic is very specific to the actual data and business rules.
 
     Args:
@@ -197,9 +192,7 @@ def remove_outliers(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def main() -> None:
-    """
-    Main function for processing sales data.
-    """
+    """Main function for processing sales data."""
     logger.info("==================================")
     logger.info("STARTING prepare_sales_data.py")
     logger.info("==================================")
