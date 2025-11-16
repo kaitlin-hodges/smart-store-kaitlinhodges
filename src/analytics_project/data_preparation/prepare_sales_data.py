@@ -208,6 +208,97 @@ def main() -> None:
     # Read raw data
     df = read_raw_data(input_file)
 
+    # Validate CustomerID values
+    try:
+        customers_df = pd.read_csv(PREPARED_DATA_DIR / "customers_cleaned.csv")
+        valid_customer_ids = customers_df["CustomerID"].astype(int).tolist()
+        before_count = len(df)
+        df["CustomerID"] = pd.to_numeric(df["CustomerID"], errors="coerce")
+        df = df[df["CustomerID"].isin(valid_customer_ids)]
+        after_count = len(df)
+
+        logger.info(f"Removed {before_count - after_count} rows with invalid CustomerID values.")
+    except Exception as e:
+        logger.error(f"Could not validate CustomerID. Error: {e}")
+
+    # Validate ProductID values
+    try:
+        products_df = pd.read_csv(PREPARED_DATA_DIR / "products_cleaned.csv")
+        valid_product_ids = products_df["ProductID"].astype(int).tolist()
+        before_count = len(df)
+        df["ProductID"] = pd.to_numeric(df["ProductID"], errors="coerce")
+        df = df[df["ProductID"].isin(valid_product_ids)]
+        after_count = len(df)
+
+        logger.info(f"Removed {before_count - after_count} rows with invalid ProductID values.")
+    except Exception as e:
+        logger.error(f"Could not validate ProductID. Error: {e}")
+
+    # Validate StoreID values
+    try:
+        # Convert StoreID safely to numeric
+        df["StoreID"] = pd.to_numeric(df["StoreID"], errors="coerce")
+
+        # Auto-detect valid store IDs from the dataset itself
+        valid_store_ids = df["StoreID"].dropna().unique().tolist()
+
+        before_count = len(df)
+        df = df[df["StoreID"].isin(valid_store_ids)]
+        after_count = len(df)
+
+        logger.info(f"Valid StoreIDs detected: {valid_store_ids}")
+        logger.info(f"Removed {before_count - after_count} rows with invalid StoreID values.")
+    except Exception as e:
+        logger.error(f"Could not validate StoreID. Error: {e}")
+
+    # Validate CampaignID values
+    try:
+        # If you later create a Campaign dimension table, update these.
+        valid_campaign_ids = [0, 1, 2, 3]
+
+        before_count = len(df)
+        df["CampaignID"] = pd.to_numeric(df["CampaignID"], errors="coerce")
+        df = df[df["CampaignID"].isin(valid_campaign_ids)]
+        after_count = len(df)
+
+        logger.info(f"Removed {before_count - after_count} rows with invalid CampaignID values.")
+    except Exception as e:
+        logger.error(f"Could not validate CampaignID. Error: {e}")
+
+    # Clean SaleAmount
+    try:
+        before_count = len(df)
+
+        # Replace invalid characters like "?" with NaN
+        df["SaleAmount"] = pd.to_numeric(df["SaleAmount"], errors="coerce")
+
+        # Remove rows where SaleAmount could not be converted
+        df = df.dropna(subset=["SaleAmount"])
+
+        after_count = len(df)
+        logger.info(f"Removed {before_count - after_count} rows with invalid SaleAmount values.")
+    except Exception as e:
+        logger.error(f"Could not clean SaleAmount. Error: {e}")
+
+    # Clean DiscountPercentage
+    try:
+        df["DiscountPercentage"] = pd.to_numeric(df["DiscountPercentage"], errors="coerce").fillna(
+            0
+        )
+    except Exception as e:
+        logger.error(f"Could not clean DiscountPercentage. Error: {e}")
+
+    # Drop rows missing SaleDate
+    try:
+        before_count = len(df)
+        df["SaleDate"] = pd.to_datetime(df["SaleDate"], errors="coerce")
+        df = df.dropna(subset=["SaleDate"])
+        after_count = len(df)
+
+        logger.info(f"Removed {before_count - after_count} rows with invalid or missing SaleDate.")
+    except Exception as e:
+        logger.error(f"Could not validate SaleDate. Error: {e}")
+
     # Record original shape
     original_shape = df.shape
 
@@ -235,6 +326,15 @@ def main() -> None:
 
     # Remove outliers
     df = remove_outliers(df)
+
+    # Reset TransactionID to continuous 1..N
+    # ---------------------------------------
+    try:
+        df = df.sort_values("TransactionID").reset_index(drop=True)
+        df["TransactionID"] = df.index + 1
+        logger.info("Reset TransactionID to continuous sequence 1..N.")
+    except Exception as e:
+        logger.error(f"Could not reset TransactionID. Error: {e}")
 
     # Save prepared data
     save_prepared_data(df, output_file)

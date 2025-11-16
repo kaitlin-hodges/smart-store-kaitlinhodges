@@ -167,6 +167,28 @@ class DataScrubber:
         except KeyError:
             raise ValueError(f"Column name '{column}' not found in the DataFrame.")
 
+    def format_currency_column(self, column: str, decimals: int = 2) -> pd.DataFrame:
+        """
+        Format a numeric column to have fixed decimal places.
+        Example: 95.4 → 95.40
+        """
+        try:
+            self.df[column] = pd.to_numeric(self.df[column], errors="coerce").round(decimals)
+            return self.df
+        except KeyError:
+            raise ValueError(f"Column name '{column}' not found in the DataFrame.")
+
+    def format_column_strings_to_title_case_and_trim(self, column: str) -> pd.DataFrame:
+        """
+        Format strings in a specified column by converting to title case and trimming whitespace.
+        Example: 'JOHN DOE' → 'John Doe'
+        """
+        try:
+            self.df[column] = self.df[column].astype(str).str.title().str.strip()
+            return self.df
+        except KeyError:
+            raise ValueError(f"Column name '{column}' not found in the DataFrame.")
+
     def clean_data(
         self,
         drop_duplicates: bool = True,
@@ -297,12 +319,31 @@ class DataScrubber:
             raise ValueError(f"Column name '{column}' not found in the DataFrame.")
 
     def remove_duplicate_records(self) -> pd.DataFrame:
-        """Remove duplicate rows from the DataFrame.
+        """Remove duplicated rows from the DataFrame..
 
         Returns:
         pd.DataFrame: Updated DataFrame with duplicates removed.
         """
+        before = len(self.df)
         self.df = self.df.drop_duplicates()
+        after = len(self.df)
+        print(f"Removed {before - after} duplicate rows.")
+        return self.df
+
+    def remove_duplicate_ids(self, column: str) -> pd.DataFrame:
+        """
+        Remove duplicate rows based on a unique ID column.
+
+        Parameters:
+            column (str): Name of the column to check for duplicates.
+
+        Returns:
+            pd.DataFrame: Updated DataFrame with duplicates removed.
+        """
+        before = len(self.df)
+        self.df = self.df.drop_duplicates(subset=[column], keep="first")
+        after = len(self.df)
+        print(f"Removed {before - after} duplicate rows based on {column}.")
         return self.df
 
     def rename_columns(self, column_mapping: dict[str, str]) -> pd.DataFrame:
@@ -322,6 +363,28 @@ class DataScrubber:
                 raise ValueError(f"Column '{old_name}' not found in the DataFrame.")
 
         self.df = self.df.rename(columns=column_mapping)
+        return self.df
+
+    def remove_invalid_ids(self, column: str, valid_ids: list[int]) -> pd.DataFrame:
+        """
+        Remove rows where the ID column does not match any valid ID in a dimension table.
+
+        Parameters:
+            column (str): The ID column to validate, e.g., "CustomerID"
+            valid_ids (list[int]): List of valid IDs from the dimension table
+
+        Returns:
+            pd.DataFrame: Cleaned DataFrame with only valid IDs
+        """
+        before = len(self.df)
+
+        # Convert both to int where possible
+        self.df[column] = pd.to_numeric(self.df[column], errors="coerce").astype("Int64")
+
+        self.df = self.df[self.df[column].isin(valid_ids)]
+
+        after = len(self.df)
+        print(f"Removed {before - after} rows with invalid {column}.")
         return self.df
 
     def reorder_columns(self, columns: List[str]) -> pd.DataFrame:
@@ -351,30 +414,63 @@ if __name__ == "__main__":
     # Define paths
     PROJECT_ROOT = Path(__file__).resolve().parents[3]
     RAW_DIR = PROJECT_ROOT / "data" / "raw"
-    PROCESSED_DIR = PROJECT_ROOT / "data" / "processed"
+    PREPARED_DIR = PROJECT_ROOT / "data" / "prepared"
 
     # Define function to clean customers_data.csv
     def clean_customers_data():
         raw_file = RAW_DIR / "customers_data.csv"
         df = pd.read_csv(raw_file)
 
+        df = df.rename(
+            columns={
+                "CustomerID": "customer_id",
+                "Name": "name",
+                "Region": "region",
+                "CustomerSince": "customer_since",
+                "LifetimePurchaseAmtUSD": "lifetime_purchase_amt_usd",
+                "PreferredContactMethod": "preferred_contact_method",
+            }
+        )
+
         print("RAW CUSTOMERS DATA SAMPLE:\n", df.head())
 
         # Create scrubber instance
         scrubber = DataScrubber(df)
 
+        scrubber.remove_duplicate_ids("customer_id")
+
         # Clean dataset
         cleaned = scrubber.clean_data(
+            drop_duplicates=True,
+            drop_na=False,
             fill_value="N/A",
-            string_upper=["CustomerID", "Name"],
-            string_lower=["Region", "PreferredContactMethod"],
-            date_columns=["CustomerSince"],
+            string_upper=["name"],
+            string_lower=["region", "preferred_contact_method"],
+            date_columns=["customer_since"],
         )
+        # Fix CustomerID
+        cleaned["customer_id"] = pd.to_numeric(cleaned["customer_id"], errors="coerce")
+
+        # drop rows where CustomerID failed conversion
+        cleaned = cleaned.dropna(subset=["customer_id"])
+        cleaned.loc[:, "customer_id"] = cleaned["customer_id"].astype(int)
+
+        # Remove duplicates after conversion
+        cleaned = cleaned.drop_duplicates(subset=["customer_id"])
+
+        # Format Name
+        cleaned["name"] = cleaned["name"].astype(str).str.title().str.strip()
+
+        # Format Currency to two decimal places
+        cleaned["lifetime_purchase_amt_usd"] = pd.to_numeric(
+            cleaned["lifetime_purchase_amt_usd"], errors="coerce"
+        ).round(2)
+
         # Show cleaned preview
         print("\nCLEANED CUSTOMERS DATA SAMPLE:\n", cleaned.head())
 
         # Save cleaned dataset
-        output_file = PROCESSED_DIR / "customers_cleaned.csv"
+        output_file = PREPARED_DIR / "customers_prepared.csv"
         cleaned.to_csv(output_file, index=False)
         print(f"\n✅ Cleaned data saved to: {output_file}")
 
@@ -386,6 +482,17 @@ if __name__ == "__main__":
         raw_file = RAW_DIR / "sales_data.csv"
         df = pd.read_csv(raw_file)
 
+        df = df.rename(
+            columns={
+                "TransactionID": "transaction_id",
+                "CustomerID": "customer_id",
+                "ProductID": "product_id",
+                "SaleDate": "sale_date",
+                "Quantity": "quantity",
+                "PaymentType": "payment_type",
+            }
+        )
+
         print("RAW SALES DATA SAMPLE:\n", df.head())
 
         # Create scrubber instance
@@ -394,16 +501,16 @@ if __name__ == "__main__":
         # Clean dataset
         cleaned = scrubber.clean_data(
             fill_value="N/A",
-            string_lower=["PaymentType"],
+            string_lower=["payment_type"],
             string_upper=[],
-            date_columns=["SaleDate"],
+            date_columns=["sale_date"],
         )
 
         # Show cleaned preview
         print("\nCLEANED DATA SAMPLE:\n", cleaned.head())
 
         # Save cleaned dataset
-        output_file = PROCESSED_DIR / "sales_cleaned.csv"
+        output_file = PREPARED_DIR / "sales_prepared.csv"
         cleaned.to_csv(output_file, index=False)
         print(f"\n✅ Cleaned data saved to: {output_file}")
 
@@ -415,6 +522,17 @@ if __name__ == "__main__":
         raw_file = RAW_DIR / "products_data.csv"
         df = pd.read_csv(raw_file)
 
+        df = df.rename(
+            columns={
+                "ProductID": "product_id",
+                "ProductName": "product_name",
+                "Category": "category",
+                "UnitPrice": "unit_price",
+                "StockQuantity": "stock_quantity",
+                "Condition": "condition",
+            }
+        )
+
         print("RAW PRODUCTS DATA SAMPLE:\n", df.head())
 
         # Create scrubber instance
@@ -423,8 +541,8 @@ if __name__ == "__main__":
         # Clean dataset
         cleaned = scrubber.clean_data(
             fill_value="N/A",
-            string_upper=["Condition", "Category"],
-            string_lower=["ProductName"],
+            string_upper=["condition", "category"],
+            string_lower=["product_name"],
             date_columns=[],
         )
 
@@ -432,7 +550,7 @@ if __name__ == "__main__":
         print("\nCLEANED PRODUCTS DATA SAMPLE:\n", cleaned.head())
 
         # Save cleaned dataset
-        output_file = PROCESSED_DIR / "products_cleaned.csv"
+        output_file = PREPARED_DIR / "products_prepared.csv"
         cleaned.to_csv(output_file, index=False)
         print(f"\n✅ Cleaned data saved to: {output_file}")
 
