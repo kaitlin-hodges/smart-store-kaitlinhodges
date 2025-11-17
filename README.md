@@ -1,6 +1,6 @@
 # Pro Analytics 02 Python Starter Repository
 
-> This contaions my start of a professional Python project.
+> This contains my start of a professional Python project.
 
 - Additional information: <https://github.com/kaitlin-hodges/smart-store-kaitlinhodges>
 - Project organization: [STRUCTURE](./STRUCTURE.md)
@@ -19,6 +19,7 @@ Proper setup is critical for success.
 Complete each step in the following guide and verify carefully using PowerShell on Windows.
 
 - [SET UP MACHINE](./SET_UP_MACHINE.md)
+- Installed uv
 
 ---
 
@@ -50,7 +51,6 @@ uv run python --version
 ```shell
 source .venv/bin/activate
 ```
-
 ---
 
 ## WORKFLOW 3. Daily Workflow
@@ -208,11 +208,99 @@ uv run python --version
 
 ## P3: Prepare Data for ETL
 ### 1. Created a Pyton script located in the src folder and named data_scrubber.py. This script uses a DataScrubber class to clean datasets.
-##
+### 2. Prepared raw data for ELT, an important step before loading data into a data warehouse.
+##### Removed duplicates
+##### Correcting typos, replacing blanks
+##### Correcting formats:
+##### - Dates
+##### - Upper/Lowercase
+##### - Numerical
+##### Identifying outliers
+##### - Negative sales
+##### - $0 sales
+
+## Loaded raw data using data_prep.py
+## Created reusable cleaning script
+### src/analytics_project/data_scrubber.py
+
+## Cleaned exported files
+#### - data/prepared/customers_clean.csv
+#### - data/prepared/products_clean.csv
+#### - data/prepared/sales_clean.csv
+
 #### Run Git Add, Commit, and Push to GitHub often & Update README.md
 ##### git add .
-##### git commit -m "  "
+##### git commit -m " Cleaned raw data "
 ##### git push -u origin main
 
+# P4. Creating and poulate Data Warehouse (etl_to_dw.py)
+### Cleaned data is uploaded to data/warehouse/smart_sales.db
+
+#### Created etl_to_dw.py
+##### src/analytics_project/dw/etl_to_dw.py
+#### Created SQLite database
+##### data/warehouse/smart_sales.sqlite
+#### Created Schema
+### Fact Table
+#### sales
+        # transaction_id INTEGER PRIMARY KEY,
+            customer_id INTEGER,
+            product_id INTEGER,
+            store_id INTEGER,
+            sale_amount DECIMAL(10,2),
+            sale_date TEXT,
+            discount_percentage DECIMAL(5,2),
+            payment_type TEXT,
+            campaign_id INTEGER,
+            FOREIGN KEY (customer_id) REFERENCES customer (customer_id),
+            FOREIGN KEY (product_id) REFERENCES product (product_id)
+
+### Dimension Tables
+##### customer
+####### customer_id INTEGER PRIMARY KEY,
+            name TEXT,
+            region TEXT,
+            customer_since TEXT,
+            lifetime_purchase_amt_usd DECIMAL(10,2),
+            preferred_contact_method TEXT
+
+##### product
+       CREATE TABLE IF NOT EXISTS product
+            product_id INTEGER PRIMARY KEY,
+            product_name TEXT,
+            category TEXT,
+            unit_price DECIMAL(10,2),
+            stock_quantity INTEGER,
+            condition TEXT
 
 
+##### Ran ETL:
+###### uv run python -m analytics_project.dw.etl_to_dw
+###### Results: 200 Customers inserted, 100 products inserted and 2000 sales inserted.
+
+## <img src="images/customers_preview.png" width="600>
+## <img src="images/product_preview.png" width="600>
+## <img src="images/sales_preview.png" width="600>
+
+### Confirmed Project Structure and that tables exsit
+
+#### src/
+####  analytics_project/
+####    utils/
+####    data_preparation/
+####    dw/
+#### data/
+####  raw/
+####  prepared/
+####  warehouse/
+
+#### Run Git Add, Commit, and Push to GitHub
+##### git add .
+##### git commit -m " Created and loaded data to DW "
+##### git push -u origin main
+
+##### Update README.md with this weeks process.
+#### Run Git Add, Commit, and Push to GitHub often & Update README.md
+##### git add .
+##### git commit -m " Updated README "
+##### git push -u origin main
