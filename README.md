@@ -276,7 +276,6 @@ uv run python --version
 
 ##### Ran ETL:
 ###### uv run python -m analytics_project.dw.etl_to_dw
-###### Results: 200 Customers inserted, 100 products inserted and 2000 sales inserted.
 
 ## <img src="src/analytics_project/images/customers_preview.png" width="600">
 ## <img src="src/analytics_project/images/product_preview.png" width="600">
