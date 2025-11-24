@@ -201,19 +201,31 @@ def load_data_to_db() -> None:
 
         logger.info(f"Product columns (cleaned):  {list(products_df.columns)}")
 
+        print(sales_df.columns.tolist())
+
+        # Normalize column names BEFORE renaming
+        sales_df.columns = (
+            sales_df.columns.str.strip()  # remove spaces
+            .str.replace(" ", "")  # remove internal spaces
+            .str.replace("\ufeff", "")  # remove BOM if present
+            .str.lower()  # convert to lowercase
+        )
+
+        print("NORMALIZED columns:", sales_df.columns.tolist())
+
         # Rename sales_df columns to match database schema if necessary
         # Clean column name : Database column name
         sales_df = sales_df.rename(
             columns={
-                "TransactionID": "transaction_id",
-                "SaleDate": "sale_date",
-                "CustomerID": "customer_id",
-                "ProductID": "product_id",
-                "StoreID": "store_id",
-                "CampaignID": "campaign_id",
-                "SaleAmount": "sale_amount",
-                "DiscountPercentage": "discount_percentage",
-                "PaymentType": "payment_type",
+                "transactionid": "transaction_id",
+                "saledate": "sale_date",
+                "customerid": "customer_id",
+                "productid": "product_id",
+                "storeid": "store_id",
+                "campaignid": "campaign_id",
+                "saleamount": "sale_amount",
+                "discountpercentage": "discount_percentage",
+                "paymenttype": "payment_type",
             }
         )
         sales_df = sales_df.drop_duplicates(subset="transaction_id")

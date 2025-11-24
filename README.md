@@ -303,3 +303,56 @@ uv run python --version
 ##### git add .
 ##### git commit -m " Updated README "
 ##### git push -u origin main
+
+# P5 PCros-Platform Reporitng with Power BI
+## Connecting to warehouse and creating visuals for the database.
+### 1. Power BI Desktop was previously downloaded.
+### 2. Installed SQLite ODBC Driver
+### 3. Created DSN named SmartSalesDSN
+
+## Loaded Tables into Power BI
+### 1. Get Data - ODBC
+### 2. Selected DSN: SmartSalesDSN
+### 3. Loaded customer, proudct, sales tables.
+
+## Created Top Customers and Top Products for extra data review.
+
+## Slicing Date Range
+##### This portion was confusing due to the dates all being the same for sales date but I feel like that was the point, just to create a slicer to show we could create it.
+### 1. Click Transform Data to open Power Query.
+### 2. Select sales table
+### 3. Select order_date column
+### 4. Add Column-Date-Quarter
+###### Add Column-Date-Month-Name of Month
+### 5. Close and appply changes.
+### 6. Select Slicer icon to insert slicer and drag date filed to the slicer, ensure it shows date range.
+
+## Dicing
+### 1. Insert Matrix
+### 2. Chose category, put into row field.
+### 3. Chose region, put into column field.
+### 4. Added sales_amount to values.
+#### This matrix shows product category broken down by region.
+
+## Drilldown - Year-Quarter-Month
+### 1. Added Clustered Column Chart.
+### 2. Built hierarchy in x-axis - year-quarter-month
+### 3. Dragged sale_amount into values
+### 4. Clicked bars to drill down.
+
+## Created Extra Visuals
+### 1. Added Bar chart for Top Customers
+###### Customer name on y axis and total spent.
+
+### 2. Added LIne chart for Sales Trends.
+###### Count of sales by totals, with Sum of Sale amount as well.
+
+### Image of creations.
+## <img src="src/analytics_project/images/Slicersgraphs.png" width="1000">
+
+##### Update README.md with this weeks process.
+#### Run Git Add, Commit, and Push to GitHub often & Update README.md
+##### git add .
+##### git commit -m " Completed analysis and visualization "
+##### git push -u origin main
+
