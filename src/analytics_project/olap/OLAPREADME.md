@@ -4,20 +4,11 @@
 - [P6 - BI Insights \& Storytelling](#p6---bi-insights--storytelling)
   - [Table of Contents](#table-of-contents)
   - [1. The Business Goal](#1-the-business-goal)
-    - [• Data for high-demand products and which region](#-data-for-high-demand-products-and-which-region)
-    - [• Marketing by region](#-marketing-by-region)
-    - [• Where to send inventory](#-where-to-send-inventory)
-    - [• Forecasting for future production](#-forecasting-for-future-production)
-    - [• Change pricing or plan promotions](#-change-pricing-or-plan-promotions)
-    - [• Change marketing strategy around top selling items](#-change-marketing-strategy-around-top-selling-items)
-    - [• Increase production for high demand products](#-increase-production-for-high-demand-products)
-    - [• Reduce production/inventory for low demand items](#-reduce-productioninventory-for-low-demand-items)
   - [2. Data Source](#2-data-source)
-    - [• DataWarehouse, VSCode and Python. I also used Power BI to see what could be created there.](#-datawarehouse-vscode-and-python-i-also-used-power-bi-to-see-what-could-be-created-there)
-    - [Sales (Fact Table): Data facts for revenue and transactions.](#sales-fact-table-data-facts-for-revenue-and-transactions)
-  - [Product (Dimension Table): Products and their descriptions.](#product-dimension-table-products-and-their-descriptions)
-  - [Customer (Dimension Table): Regional analysis.](#customer-dimension-table-regional-analysis)
-  - [Loaded from:](#loaded-from)
+        - [Sales (Fact Table): Data facts for revenue and transactions.](#sales-fact-table-data-facts-for-revenue-and-transactions)
+      - [Product (Dimension Table): Products and their descriptions.](#product-dimension-table-products-and-their-descriptions)
+      - [Customer (Dimension Table): Regional analysis.](#customer-dimension-table-regional-analysis)
+      - [Loaded from:](#loaded-from)
   - [3. Tools](#3-tools)
     - [Python, SQLite3 DW, VS Code Virtual Environment, Power BI](#python-sqlite3-dw-vs-code-virtual-environment-power-bi)
       - [Python allowed for:](#python-allowed-for)
@@ -49,34 +40,34 @@ Goal:
 Identify the top-selling products across all regions and categories to support production planning, inventory management and marketing efforts.
 Why this matters:
 To understand which products generate the most revenue and where, to help the business make decisions supported by data. By drilling down into top selling products per region, would assist in where the products succeed.
-### • Data for high-demand products and which region
-### • Marketing by region
-### • Where to send inventory
-### • Forecasting for future production
-### • Change pricing or plan promotions
-### • Change marketing strategy around top selling items
-### • Increase production for high demand products
-### • Reduce production/inventory for low demand items
+- Data for high-demand products and which region
+- Marketing by region
+- Where to send inventory
+- Forecasting for future production
+- Change pricing or plan promotions
+- Change marketing strategy around top selling items
+- Increase production for high demand products
+- Reduce production/inventory for low demand items
 --
 ## 2. Data Source
-### • DataWarehouse, VSCode and Python. I also used Power BI to see what could be created there.
-### Sales (Fact Table): Data facts for revenue and transactions.
+DataWarehouse, VSCode and Python. I also used Power BI to see what could be created there.
+##### Sales (Fact Table): Data facts for revenue and transactions.
 **Columns used:**
 - Sale Amount
 - Sale Date
 - Transaction ID
 - Product ID
 - Customer ID
-## Product (Dimension Table): Products and their descriptions.
+#### Product (Dimension Table): Products and their descriptions.
 **Columns used:**
 - Product Name
 - Product ID
 - Category
-## Customer (Dimension Table): Regional analysis.
+#### Customer (Dimension Table): Regional analysis.
 **Columns used:**
 - Region
 - Customer ID
-## Loaded from:
+#### Loaded from:
 - data/warehouse/smart_sales.db
 --
 ## 3. Tools
@@ -156,6 +147,7 @@ I chose to also add in lowest selling products overall. We could go further and 
 I started with creating more visualizations from Power BI but I wanted to challenge myself more so I used VSCoder to create my results and visuals too. I created the results originally in the wrong folder but I changed that and saved them in my OLAP folder.  I also decided to create more visualizations than probably necessary to try to challenge myself and see what is possible to create, how it worked. I also did not use the cube, I pulled directly from the data warehouse and this took me a minute to figure out I didn't have to use the cube. Another challenge I had was when originally creating the graphics, the charts seemed way overloaded so I put into the script to choose the top 15.
 
 **Updated Project structure:**
+```text
 src/
   analytics_project/
     utils/
