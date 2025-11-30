@@ -84,28 +84,51 @@ DataWarehouse, VSCode and Python. I also used Power BI to see what could be crea
 
 ### Revenue by Region and Product
 <div align="center">
+
 ## Central
+
 </div>
+
 ![Dice Region Product](./top15_products_region_central.png)
+
 <div align="center">
+
 ## East
+
 </div>
+
 ![Dice Region Product](./top15_products_region_east.png)
+
 <div align="center">
+
 ## North
+
 </div>
+
 ![Dice Region Product](./top15_products_region_north.png)
+
 <div align="center">
+
 ## South-West
+
 </div>
+
 ![Dice Region Product](./top15_products_region_south-west.png)
+
 <div align="center">
+
 ## South
+
 </div>
+
 ![Dice Region Product](./top15_products_region_south.png)
+
 <div align="center">
+
 ## West
+
 </div>
+
 ![Dice Region Product](./top15_products_region_west.png)
 
 ## Top Product Per Region
