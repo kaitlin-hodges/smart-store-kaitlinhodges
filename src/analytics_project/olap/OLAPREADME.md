@@ -1,39 +1,15 @@
 # P6 - BI Insights & Storytelling
 
 ## Table of Contents
-- [P6 - BI Insights \& Storytelling](#p6---bi-insights--storytelling)
-  - [Table of Contents](#table-of-contents)
-  - [1. The Business Goal](#1-the-business-goal)
-  - [2. Data Source](#2-data-source)
-        - [Sales (Fact Table): Data facts for revenue and transactions.](#sales-fact-table-data-facts-for-revenue-and-transactions)
-      - [Product (Dimension Table): Products and their descriptions.](#product-dimension-table-products-and-their-descriptions)
-      - [Customer (Dimension Table): Regional analysis.](#customer-dimension-table-regional-analysis)
-      - [Loaded from:](#loaded-from)
-  - [3. Tools](#3-tools)
-    - [Python, SQLite3 DW, VS Code Virtual Environment, Power BI](#python-sqlite3-dw-vs-code-virtual-environment-power-bi)
-      - [Python allowed for:](#python-allowed-for)
-  - [goal\_top\_products located in:](#goal_top_products-located-in)
-  - [4. Workflow \& Logic](#4-workflow--logic)
-    - [Electronics category then Revenue](#electronics-category-then-revenue)
-      - [Added Slicing for each region by product to see what generated the most revenue](#added-slicing-for-each-region-by-product-to-see-what-generated-the-most-revenue)
-      - [- Could drill this down to lowest per region but am leaving it out.](#--could-drill-this-down-to-lowest-per-region-but-am-leaving-it-out)
-  - [5. Results](#5-results)
-    - [Top-Selling Products – Revenue](#top-selling-products--revenue)
-        - [The highest selling products are office-doctr, which created quite a bit more in revenue than other items. This should be what is prioritized the highest. The next 5 products should be prioritized as well due to the high revenue. I also added lowest revenue products overall and there is potential to drill down further and add per region, but leaving it as overall.](#the-highest-selling-products-are-office-doctr-which-created-quite-a-bit-more-in-revenue-than-other-items-this-should-be-what-is-prioritized-the-highest-the-next-5-products-should-be-prioritized-as-well-due-to-the-high-revenue-i-also-added-lowest-revenue-products-overall-and-there-is-potential-to-drill-down-further-and-add-per-region-but-leaving-it-as-overall)
-    - [Overall Top Products – Combining all regions](#overall-top-products--combining-all-regions)
-    - [Revenue by Region and Product](#revenue-by-region-and-product)
-    - [\* Central](#-central)
-    - [\* East](#-east)
-    - [\* North](#-north)
-    - [\* South-West](#-south-west)
-    - [\* South](#-south)
-    - [\* West](#-west)
-  - [Top Product Per Region](#top-product-per-region)
-  - [Region-Month Trend](#region-month-trend)
-  - [Transactions Per Region](#transactions-per-region)
-  - [Lowest Revenue Products](#lowest-revenue-products)
-  - [6. Suggested Business Action](#6-suggested-business-action)
-  - [7. Challenges](#7-challenges)
+1. [The Business Goal](#1-the-business-goal)
+2. [Data Source](#2-data-source)
+3. [Tools](#3-tools)
+4. [Workflow & Logic](#4-workflow--logic)
+5. [Results](#5-results)
+6. [Suggested Business Action](#6-suggested-business-action)
+7. [Challenges](#7-challenges)
+8. [Project Structure](#project-structure)
+
 
 ## 1. The Business Goal
 Goal:
@@ -107,17 +83,29 @@ DataWarehouse, VSCode and Python. I also used Power BI to see what could be crea
 ![Top Products](./top_products_overall.png)
 
 ### Revenue by Region and Product
-### * Central
+<div align="center">
+## Central
+</div>
 ![Dice Region Product](./top15_products_region_central.png)
-### * East
+<div align="center">
+## East
+</div>
 ![Dice Region Product](./top15_products_region_east.png)
-### * North
+<div align="center">
+## North
+</div>
 ![Dice Region Product](./top15_products_region_north.png)
-### * South-West
+<div align="center">
+## South-West
+</div>
 ![Dice Region Product](./top15_products_region_south-west.png)
-### * South
+<div align="center">
+## South
+</div>
 ![Dice Region Product](./top15_products_region_south.png)
-### * West
+<div align="center">
+## West
+</div>
 ![Dice Region Product](./top15_products_region_west.png)
 
 ## Top Product Per Region
@@ -162,6 +150,7 @@ olap/
   *.csv
   *.png
 README.md
+```
 
 Update README.md with this weeks process.
 git add .
