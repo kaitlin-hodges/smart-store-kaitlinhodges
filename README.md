@@ -470,25 +470,23 @@ uv run python --version
 # 7. Challenges
 ### * I started with creating more visualizations from Power BI but I wanted to challenge myself more so I used VSCoder to create my results and visuals too. I created the results originally in the wrong folder but I changed that and saved them in my OLAP folder.  I also decided to create more visualizations than probably necessary to try to challenge myself and see what is possible to create, how it worked. I also did not use the cube, I pulled directly from the data warehouse and this took me a minute to figure out I didn't have to use the cube. Another challenge I had was when originally creating the graphics, the charts seemed way overloaded so I put into the script to choose the top 15.
 
-### Updated Project structure:
-#### src/
-####  analytics_project/
-####    utils/
-####    data_preparation/
-####    dw/
-#### data/
-####  raw/
-####  prepared/
-####  warehouse/
-#### olap/
-####  goal_top_products.py
-####  csv files
-####  .png - visuals
-#### README.md
+Updated Project Structure
+src/
+  analytics_project/
+    utils/
+    data_preparation/
+    dw/
+data/
+  raw/
+  prepared/
+  warehouse/
+olap/
+  goal_top_products.py
+  *.csv
+  *.png
+README.md
 
-##### Update README.md with this weeks process.
-#### Run Git Add, Commit, and Push to GitHub often & Update README.md
-##### git add .
-##### git commit -m " Completed OLAP Analysis and Visualizations "
-##### git push -u origin main
+git add .
+git commit -m "Completed OLAP Analysis and Visualizations"
+git push -u origin main
 
