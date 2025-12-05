@@ -77,7 +77,7 @@ DataWarehouse, VSCode and Python. I also used Power BI to see what could be crea
 #### - Could drill this down to lowest per region but am leaving it out.
 ## 5. Results
 ### Top-Selling Products – Revenue
-##### The highest selling products are office-doctr, which created quite a bit more in revenue than other items. This should be what is prioritized the highest. The next 5 products should be prioritized as well due to the high revenue. I also added lowest revenue products overall and there is potential to drill down further and add per region, but leaving it as overall.
+The highest selling products are office-doctr, which created quite a bit more in revenue than other items. This should be what is prioritized the highest. The next 5 products should be prioritized as well due to the high revenue. I also added lowest revenue products overall and there is potential to drill down further and add per region, but leaving it as overall.
 
 ### Overall Top Products – Combining all regions
 ![Top Products](./top_products_overall.png)
@@ -155,7 +155,7 @@ I chose to also add in lowest selling products overall. We could go further and 
 - Review results for low-selling products and consider discontinuing the items and having a sale or clearance event.
 
 ## 7. Challenges
-I started with creating more visualizations from Power BI but I wanted to challenge myself more so I used VSCoder to create my results and visuals too. I created the results originally in the wrong folder but I changed that and saved them in my OLAP folder.  I also decided to create more visualizations than probably necessary to try to challenge myself and see what is possible to create, how it worked. I also did not use the cube, I pulled directly from the data warehouse and this took me a minute to figure out I didn't have to use the cube. Another challenge I had was when originally creating the graphics, the charts seemed way overloaded so I put into the script to choose the top 15.
+I started with creating more visualizations from Power BI but I wanted to challenge myself more so I used VSCoder to create my results and visuals too. I created the results originally in the wrong folder but I changed that and saved them in my OLAP folder.  I also decided to create more visualizations than probably necessary to try to challenge myself and see what is possible to create, how it worked.  Another challenge I had was when originally creating the graphics, the charts seemed way overloaded so I put into the script to choose the top 15.
 
 **Updated Project structure:**
 ```text
